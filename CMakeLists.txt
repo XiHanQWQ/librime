@@ -247,6 +247,11 @@ if(BUILD_DATA)
 endif()
 
 if(BUILD_SHARED_LIBS)
+  # Export all symbols for Windows DLL build, to avoid undefined symbols in linking the executables.
+  # https://github.com/rime/librime/issues/479
+  if(WIN32)
+    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+  endif()
   add_definitions(-DRIME_BUILD_SHARED_LIBS)
   set(rime_library rime)
   if(BUILD_SEPARATE_LIBS)

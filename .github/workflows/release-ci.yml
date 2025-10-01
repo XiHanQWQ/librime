@@ -15,14 +15,12 @@ jobs:
   macos:
     uses: ./.github/workflows/macos-build.yml
     with:
-      # rime_plugins: hchunhui/librime-lua lotem/librime-octagram rime/librime-predict Huangjian/librime-qjs@main
-      rime_plugins: XiHanQWQ/librime-lua lotem/librime-octagram rime/librime-predict Huangjian/librime-qjs@main
+      rime_plugins: hchunhui/librime-lua lotem/librime-octagram rime/librime-predict Huangjian/librime-qjs@main
 
   windows:
     uses: ./.github/workflows/windows-build.yml
     with:
-      # rime_plugins: hchunhui/librime-lua lotem/librime-octagram fxliang/librime-predict-leveldb
-      rime_plugins: XiHanQWQ/librime-lua lotem/librime-octagram fxliang/librime-predict-leveldb
+      rime_plugins: hchunhui/librime-lua lotem/librime-octagram fxliang/librime-predict-leveldb
 
   release:
     needs: [macos, windows]

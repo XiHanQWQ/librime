@@ -1,34 +1,32 @@
-#更新fork
 name: update fork
 
 on:
    repository_dispatch:
    workflow_dispatch:
    schedule:
-     - cron: '55 7 * * *' #设置定时任务
+     - cron: '55 7 * * *'
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # 添加这个权限
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4  # 升级到 v4
       with:
         fetch-depth: 0
-        token: ${{ secrets.WORKFLOW_TOKEN }}
+        # 移除 token 配置，使用自动的 GITHUB_TOKEN
+    
     - name: Set env
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+    
     - name: Update fork master
       run: |
         git remote add upstream https://github.com/rime/librime.git
         git remote -v
         git fetch upstream
-        git checkout master || git checkout -b master origin/master
+        git checkout master
         git merge --strategy-option=ours upstream/master
-        git push -f origin master
-    - name: Update fork patch
-      run: |
-        git checkout patch || git checkout -b patch origin/patch
-        git rebase --strategy-option=ours upstream/master
-        git push -f origin patch        
+        git push origin master

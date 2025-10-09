@@ -1,4 +1,4 @@
-name: update fork
+name: Update fork
 
 on:
    repository_dispatch:
@@ -9,13 +9,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # 添加这个权限
+      contents: write
     steps:
     - name: Checkout
-      uses: actions/checkout@v4  # 升级到 v4
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
-        # 移除 token 配置，使用自动的 GITHUB_TOKEN
     
     - name: Set env
       run: |
@@ -30,3 +29,9 @@ jobs:
         git checkout master
         git merge --strategy-option=ours upstream/master
         git push origin master
+        
+    - name: Update fork patch
+      run: |
+        git checkout patch || git checkout -b patch origin/patch
+        git rebase --strategy-option=ours upstream/master
+        git push -f origin patch

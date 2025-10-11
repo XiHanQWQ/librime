@@ -44,10 +44,16 @@ Editor::Editor(const Ticket& ticket, bool auto_commit)
 }
 
 ProcessResult Editor::ProcessKeyEvent(const KeyEvent& key_event) {
-  if (key_event.release())
-    return kRejected;
   int ch = key_event.keycode();
   Context* ctx = engine_->context();
+  if (key_event.release()) {
+    if (ctx->IsComposing() && !key_event.ctrl() && !key_event.alt() &&
+        !key_event.super() && ch > 0x20 && ch < 0x7f) {
+      return kAccepted;
+    } else {
+      return kRejected;
+    }
+  }
   if (ctx->IsComposing()) {
     auto result = KeyBindingProcessor::ProcessKeyEvent(key_event, ctx, 0,
                                                        FallbackOptions::All);

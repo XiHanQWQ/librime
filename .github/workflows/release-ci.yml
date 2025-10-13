@@ -20,7 +20,7 @@ jobs:
   windows:
     uses: ./.github/workflows/windows-build.yml
     with:
-      rime_plugins: hchunhui/librime-lua lotem/librime-octagram XiHanQWQ/librime-userdb-cleaner fxliang/librime-predict-leveldb # rime/librime-predict
+      rime_plugins: hchunhui/librime-lua lotem/librime-octagram XiHanQWQ/librime-userdb-cleaner fxliang/librime-predict-leveldb Huangjian/librime-qjs@main # rime/librime-predict
 
   release:
     needs: [macos, windows]

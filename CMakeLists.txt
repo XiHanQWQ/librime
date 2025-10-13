@@ -8,6 +8,8 @@ set(CMAKE_CXX_STANDARD 17)
 set(rime_version 1.14.0)
 set(rime_soversion 1)
 
+set(rime_library "${CMAKE_SOURCE_DIR}/lib/rime.lib")
+
 add_definitions(-DRIME_VERSION="${rime_version}")
 
 include(GNUInstallDirs)

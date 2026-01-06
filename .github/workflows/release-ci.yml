@@ -11,8 +11,6 @@ on:
 jobs:
   linux:
     uses: ./.github/workflows/linux-build.yml
-    with:
-      rime_plugins: hchunhui/librime-lua lotem/librime-octagram rime/librime-predict
 
   macos:
     uses: ./.github/workflows/macos-build.yml

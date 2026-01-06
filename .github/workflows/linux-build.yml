@@ -32,6 +32,9 @@ jobs:
       - name: Install dependency
         run: ./action-install-linux.sh
 
+      - name: Install Rime plugins
+        run: ./action-install-plugins-linux.sh        
+
       - name: Build and test
         run: make test
         env:

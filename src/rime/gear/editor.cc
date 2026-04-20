@@ -54,7 +54,7 @@ ProcessResult Editor::ProcessKeyEvent(const KeyEvent& key_event) {
     } else {
       return kRejected;
     }
-  }    
+  }
   if (ctx->IsComposing()) {
     auto result = KeyBindingProcessor::ProcessKeyEvent(key_event, ctx, 0,
                                                        FallbackOptions::All);

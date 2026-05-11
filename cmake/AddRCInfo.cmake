@@ -19,7 +19,8 @@ if(git_executable)
   endif()
 endif()
 # set build_release
-if ("${git_branch}" STREQUAL "master")
+# if ("${git_branch}" STREQUAL "master")
+if ("${git_branch}" STREQUAL "pb")
   # git_commit
   execute_process(
     COMMAND git rev-parse --short HEAD

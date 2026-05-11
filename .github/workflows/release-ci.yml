@@ -3,7 +3,8 @@ name: Release CI
 on:
   push:
     branches:
-      - master
+      # - master
+      - pb
     tags:
       - '[0-9]+.*'
   workflow_dispatch:
@@ -20,7 +21,7 @@ jobs:
   windows:
     uses: ./.github/workflows/windows-build.yml
     with:
-      rime_plugins: hchunhui/librime-lua lotem/librime-octagram rime/librime-predict
+      rime_plugins: hchunhui/librime-lua lotem/librime-octagram XiHanQWQ/librime-userdb-cleaner fxliang/librime-predict-leveldb # rime/librime-predict
 
   release:
     needs: [macos, windows]
@@ -33,7 +34,7 @@ jobs:
           merge-multiple: true
 
       - name: Create Nightly release
-        if: ${{ github.repository == 'rime/librime' && github.ref == 'refs/heads/master' }}
+        if: ${{ github.repository == 'XiHanQWQ/librime' && github.ref == 'refs/heads/pb' }}
         uses: 'marvinpinto/action-automatic-releases@latest'
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
@@ -44,7 +45,7 @@ jobs:
             artifact/*
 
       - name: Create Stable release
-        if: ${{ github.ref != 'refs/heads/master' }}
+        if: ${{ github.ref != 'refs/heads/pb' }}
         uses: 'marvinpinto/action-automatic-releases@latest'
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}

@@ -22,6 +22,8 @@ jobs:
     env:
       CC: ${{ matrix.compiler }}
       CXX: ${{ matrix.cxx_compiler }}
+      BOOST_ROOT: ${{ github.workspace }}/deps/boost
+      boost_libs: regex
     
     steps:
       - name: Checkout last commit
